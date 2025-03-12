@@ -7,6 +7,8 @@ class Programm
     {
         ShowDelegate showDelegate = Min;
         showDelegate += Sum;
+
+        showDelegate -= Sum;
         showDelegate.Invoke(33, 20);
         Console.ReadKey();
     }
