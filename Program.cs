@@ -2,22 +2,37 @@
 
 class Programm
 {
-    public delegate void ShowDelegate(int x, int y);
+    delegate void ShowMessageDelegate();
+    delegate int SumDelegate(int a, int b, int c);
+    delegate bool CheckLengthDelegate(string _row);
     static void Main(string[] args)
     {
-        ShowDelegate showDelegate = Min;
-        showDelegate += Sum;
+        ShowMessageDelegate showMessageDelegate = ShowMessage;
+        showMessageDelegate.Invoke();
 
-        showDelegate -= Sum;
-        showDelegate.Invoke(33, 20);
+        SumDelegate sumDelegate = Sum;
+        int result = sumDelegate.Invoke(1, 30, 120);
+        Console.WriteLine(result);
+
+        CheckLengthDelegate checkLengthDelegate = CheckLength;
+        bool status = checkLengthDelegate.Invoke("skill_factory");
+        Console.WriteLine(status);
+
         Console.ReadKey();
     }
-    static void Min(int x, int y)
+    static void ShowMessage()
     {
-        Console.WriteLine(x - y);
+        Console.WriteLine("Hello World!");
     }
-    static void Sum(int x, int y)
+
+    static int Sum(int a, int b, int c)
     {
-        Console.WriteLine(x + y);
+        return a + b + c;
+    }
+
+    static bool CheckLength(string _row)
+    {
+        if (_row.Length > 3) return true;
+        return false;
     }
 }
